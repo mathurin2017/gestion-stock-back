@@ -1,13 +1,15 @@
 package com.lloufa.gestionstockback.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -20,4 +22,5 @@ public class Category extends AbstractEntity {
 
     @OneToMany(mappedBy = "category")
     private List<Article> articles;
+
 }

@@ -1,6 +1,7 @@
 package com.lloufa.gestionstockback.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,7 +14,7 @@ import java.time.Instant;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class AbstractEntity implements Serializable {
+public abstract class AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue

@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import java.time.Instant;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

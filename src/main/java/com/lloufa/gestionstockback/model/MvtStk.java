@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
