@@ -1,7 +1,6 @@
 package com.lloufa.gestionstockback.validator;
 
 import com.lloufa.gestionstockback.dto.ClientDto;
-import com.lloufa.gestionstockback.dto.UtilisateurDto;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;

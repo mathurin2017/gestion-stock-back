@@ -19,7 +19,7 @@ public class UtilisateurValidator {
             if (!StringUtils.hasLength(utilisateurDto.getMotDePasse())) errors.add("Veillez renseigner le mot de passe de l'utilisateur");
             if (null == utilisateurDto.getDateDeNaissance()) errors.add("Veillez renseigner la date de l'utilisateur");
             if (null == utilisateurDto.getAdresseDto()) {
-                errors.add("Veillez renseigner l'adresse de l'utilisateur'");
+                errors.add("Veillez renseigner l'adresse de l'utilisateur");
             } else {
                 errors.addAll(UtilsValidator.validateAdresse(utilisateurDto.getAdresseDto()));
             }

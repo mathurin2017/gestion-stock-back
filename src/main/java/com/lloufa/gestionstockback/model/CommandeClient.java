@@ -21,7 +21,7 @@ public class CommandeClient extends AbstractEntity {
     private Instant dateCommande;
 
     @ManyToOne
-    @JoinColumn(name = "idClient")
+    @JoinColumn(name = "id_client")
     private Client client;
 
     @OneToMany(mappedBy = "commandeClient")

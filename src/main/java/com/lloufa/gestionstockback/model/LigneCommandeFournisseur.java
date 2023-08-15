@@ -19,10 +19,10 @@ public class LigneCommandeFournisseur extends AbstractEntity {
     private BigDecimal prixUnitaire;
 
     @ManyToOne
-    @JoinColumn(name = "idArticle")
+    @JoinColumn(name = "id_article")
     private Article article;
 
     @ManyToOne
-    @JoinColumn(name = "idCommandeFournisseur")
+    @JoinColumn(name = "id_commande_fournisseur")
     private CommandeFournisseur commandeFournisseur;
 }

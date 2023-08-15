@@ -22,6 +22,6 @@ public class MvtStk extends AbstractEntity {
     private TypeMvt typeMvt;
 
     @ManyToOne
-    @JoinColumn(name = "idArticle")
+    @JoinColumn(name = "id_article")
     private Article article;
 }

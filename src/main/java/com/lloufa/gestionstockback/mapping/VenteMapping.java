@@ -8,7 +8,7 @@ public class VenteMapping {
     public static VenteDto fromEntity(Vente vente) {
         if (null == vente) {
             return null;
-            // TODO throw an execption
+            // TODO throw an exception
         }
 
         return VenteDto.builder()
@@ -22,7 +22,7 @@ public class VenteMapping {
     public static Vente toEntity(VenteDto venteDto) {
         if (null == venteDto) {
             return null;
-            // TODO throw an execption
+            // TODO throw an exception
         }
 
         Vente vente = new Vente();

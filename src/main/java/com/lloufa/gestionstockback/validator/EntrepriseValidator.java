@@ -20,7 +20,7 @@ public class EntrepriseValidator {
             if (!StringUtils.hasLength(entrepriseDto.getEmail())) errors.add("Veillez renseigner l'email de l'entreprise");
             if (!StringUtils.hasLength(entrepriseDto.getNumeroTelephone())) errors.add("Veillez renseigner le numéro de téléphone de l'entreprise");
             if (null == entrepriseDto.getAdresseDto()) {
-                errors.add("Veillez renseigner l'adresse de l'entreprise'");
+                errors.add("Veillez renseigner l'adresse de l'entreprise");
             } else {
                 errors.addAll(UtilsValidator.validateAdresse(entrepriseDto.getAdresseDto()));
             }

@@ -1,6 +1,5 @@
 package com.lloufa.gestionstockback.validator;
 
-import com.lloufa.gestionstockback.dto.ClientDto;
 import com.lloufa.gestionstockback.dto.FournisseurDto;
 import org.springframework.util.StringUtils;
 

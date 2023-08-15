@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
-public class LigneCommandeClientDto {
+public class  LigneCommandeClientDto {
 
     private Integer id;
 
