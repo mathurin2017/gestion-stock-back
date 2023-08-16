@@ -34,4 +34,5 @@ public class InvalidEntityException extends RuntimeException {
         this.errorCode = errorCode;
         this.errors = errors;
     }
+
 }

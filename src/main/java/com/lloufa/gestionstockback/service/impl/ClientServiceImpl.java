@@ -63,4 +63,5 @@ public class ClientServiceImpl implements ClientService {
         ClientDto clientDto = findById(id);
         if (null != clientDto) this.clientRepository.delete(ClientMapping.toEntity(clientDto));
     }
+
 }

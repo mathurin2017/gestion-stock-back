@@ -33,4 +33,5 @@ public class LigneVenteMapping {
 
         return ligneVente;
     }
+
 }

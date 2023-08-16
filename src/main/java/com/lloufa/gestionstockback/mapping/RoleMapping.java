@@ -31,4 +31,5 @@ public class RoleMapping {
 
         return role;
     }
+
 }

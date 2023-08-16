@@ -22,4 +22,5 @@ public class ErrorDto {
     private String message;
 
     private List<String> errors = new ArrayList<>();
+
 }

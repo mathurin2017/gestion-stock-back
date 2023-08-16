@@ -15,4 +15,5 @@ public interface ArticleService {
     List<ArticleDto> findAll();
 
     void delete(Integer id);
+
 }

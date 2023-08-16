@@ -15,4 +15,5 @@ public interface CommandeFournisseurService {
     List<CommandeFournisseurDto> findAll();
 
     void delete(Integer id);
+
 }

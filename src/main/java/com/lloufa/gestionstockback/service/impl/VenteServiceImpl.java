@@ -93,4 +93,5 @@ public class VenteServiceImpl implements VenteService {
         VenteDto venteDto = findById(id);
         if (null != venteDto) this.venteRepository.delete(VenteMapping.toEntity(venteDto));
     }
+
 }

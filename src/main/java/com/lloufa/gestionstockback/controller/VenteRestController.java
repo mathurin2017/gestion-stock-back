@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.VenteApi;
 import com.lloufa.gestionstockback.dto.VenteDto;
 import com.lloufa.gestionstockback.service.VenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,23 +19,25 @@ public class VenteRestController implements VenteApi {
         this.venteService = venteService;
     }
 
-    public VenteDto save(VenteDto venteDto) {
-        return this.venteService.save(venteDto);
+    public ResponseEntity<VenteDto> save(VenteDto venteDto) {
+        return ResponseEntity.ok(this.venteService.save(venteDto));
     }
 
-    public VenteDto update(VenteDto venteDto) {
-        return this.venteService.save(venteDto);
+    public ResponseEntity<VenteDto> update(VenteDto venteDto) {
+        return ResponseEntity.ok(this.venteService.save(venteDto));
     }
 
-    public VenteDto findById(Integer id) {
-        return this.venteService.findById(id);
+    public ResponseEntity<VenteDto> findById(Integer id) {
+        return ResponseEntity.ok(this.venteService.findById(id));
     }
 
-    public List<VenteDto> findAll() {
-        return this.venteService.findAll();
+    public ResponseEntity<List<VenteDto>> findAll() {
+        return ResponseEntity.ok(this.venteService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.venteService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

@@ -18,4 +18,5 @@ public class LigneCommandeFournisseurDto {
     private ArticleDto articleDto;
 
     private CommandeFournisseurDto commandeFournisseurDto;
+
 }

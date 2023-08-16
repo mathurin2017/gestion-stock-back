@@ -39,4 +39,5 @@ public enum ErrorCode {
     int getCode() {
         return this.code;
     }
+
 }

@@ -24,4 +24,5 @@ public abstract class AbstractEntity implements Serializable {
 
     @LastModifiedDate
     private Instant lastUpdateDate;
+
 }

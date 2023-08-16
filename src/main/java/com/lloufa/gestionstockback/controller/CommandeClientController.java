@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.CommandeClientApi;
 import com.lloufa.gestionstockback.dto.CommandeClientDto;
 import com.lloufa.gestionstockback.service.CommandeClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,27 +19,29 @@ public class CommandeClientController implements CommandeClientApi {
         this.commandeClientService = commandeClientService;
     }
 
-    public CommandeClientDto save(CommandeClientDto commandeClientDto) {
-        return this.commandeClientService.save(commandeClientDto);
+    public ResponseEntity<CommandeClientDto> save(CommandeClientDto commandeClientDto) {
+        return ResponseEntity.ok(this.commandeClientService.save(commandeClientDto));
     }
 
-    public CommandeClientDto update(CommandeClientDto commandeClientDto) {
-        return this.commandeClientService.save(commandeClientDto);
+    public ResponseEntity<CommandeClientDto> update(CommandeClientDto commandeClientDto) {
+        return ResponseEntity.ok(this.commandeClientService.save(commandeClientDto));
     }
 
-    public CommandeClientDto findById(Integer id) {
-        return this.commandeClientService.findById(id);
+    public ResponseEntity<CommandeClientDto> findById(Integer id) {
+        return ResponseEntity.ok(this.commandeClientService.findById(id));
     }
 
-    public CommandeClientDto findByCode(String code) {
-        return this.commandeClientService.findByCode(code);
+    public ResponseEntity<CommandeClientDto> findByCode(String code) {
+        return ResponseEntity.ok(this.commandeClientService.findByCode(code));
     }
 
-    public List<CommandeClientDto> findAll() {
-        return this.commandeClientService.findAll();
+    public ResponseEntity<List<CommandeClientDto>> findAll() {
+        return ResponseEntity.ok(this.commandeClientService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.commandeClientService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

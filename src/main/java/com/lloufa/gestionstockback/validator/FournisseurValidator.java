@@ -22,4 +22,5 @@ public class FournisseurValidator {
 
         return errors;
     }
+
 }

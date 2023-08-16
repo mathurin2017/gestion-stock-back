@@ -63,4 +63,5 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         UtilisateurDto utilisateurDto = findById(id);
         if (null != utilisateurDto) this.utilisateurRepository.delete(UtilisateurMapping.toEntity(utilisateurDto));
     }
+
 }

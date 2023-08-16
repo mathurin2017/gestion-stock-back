@@ -64,4 +64,5 @@ public class FournisseurServiceImpl implements FournisseurService {
         FournisseurDto fournisseurDto = findById(id);
         if (null != fournisseurDto) this.fournisseurRepository.delete(FournisseurMapping.toEntity(fournisseurDto));
     }
+
 }

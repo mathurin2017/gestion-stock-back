@@ -15,4 +15,5 @@ public interface CommandeClientService {
     List<CommandeClientDto> findAll();
 
     void delete(Integer id);
+
 }

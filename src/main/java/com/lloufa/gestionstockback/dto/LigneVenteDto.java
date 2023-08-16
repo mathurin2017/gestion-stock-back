@@ -16,4 +16,5 @@ public class LigneVenteDto {
     private BigDecimal prixUnitaire;
 
     private VenteDto venteDto;
+
 }

@@ -33,4 +33,5 @@ public class VenteMapping {
 
         return vente;
     }
+
 }

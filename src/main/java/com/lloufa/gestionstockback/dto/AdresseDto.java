@@ -17,4 +17,5 @@ public class AdresseDto {
     private String codePostal;
 
     private String pays;
+
 }

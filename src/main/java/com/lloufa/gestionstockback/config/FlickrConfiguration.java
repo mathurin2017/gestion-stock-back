@@ -70,4 +70,5 @@ public class FlickrConfiguration {
 
         return flickr;
     }
+
 }

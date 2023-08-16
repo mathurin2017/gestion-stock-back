@@ -19,4 +19,5 @@ public class CommandeFournisseurDto {
     private FournisseurDto fournisseurDto;
 
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurDtos;
+
 }

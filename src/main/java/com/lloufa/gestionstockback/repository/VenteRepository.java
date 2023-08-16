@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface VenteRepository extends JpaRepository<Vente, Integer> {
 
     Optional<Vente> findVenteByCode(String code);
+
 }

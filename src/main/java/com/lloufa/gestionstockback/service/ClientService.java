@@ -13,4 +13,5 @@ public interface ClientService {
     List<ClientDto> findAll();
 
     void delete(Integer id);
+
 }

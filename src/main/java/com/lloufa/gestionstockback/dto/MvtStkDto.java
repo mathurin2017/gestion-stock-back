@@ -20,4 +20,5 @@ public class MvtStkDto {
     private TypeMvt typeMvt;
 
     private ArticleDto articleDto;
+
 }

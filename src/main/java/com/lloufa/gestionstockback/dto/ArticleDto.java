@@ -33,4 +33,5 @@ public class ArticleDto {
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurDtos;
 
     private List<MvtStkDto> mvtStkDtos;
+
 }

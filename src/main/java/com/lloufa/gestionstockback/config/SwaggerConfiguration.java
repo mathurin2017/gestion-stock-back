@@ -31,4 +31,5 @@ public class SwaggerConfiguration {
                 .title("Gestion de stock REST API")
                 .build();
     }
+
 }

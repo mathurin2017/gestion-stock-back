@@ -35,4 +35,5 @@ public class LigneCommandeFournisseurMapping {
 
         return ligneCommandeFournisseur;
     }
+
 }

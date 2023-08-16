@@ -105,4 +105,5 @@ public class CommandeClientServiceImpl implements CommandeClientService {
         CommandeClientDto commandeClientDto = findById(id);
         if (null != commandeClientDto) this.commandeClientRepository.delete(CommandeClientMapping.toEntity(commandeClientDto));
     }
+
 }

@@ -33,4 +33,5 @@ public class Entreprise  extends AbstractEntity {
 
     @OneToMany(mappedBy = "entreprise")
     private List<Utilisateur> utilisateurs;
+
 }

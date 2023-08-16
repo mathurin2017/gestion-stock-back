@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.CommandeFournisseurApi;
 import com.lloufa.gestionstockback.dto.CommandeFournisseurDto;
 import com.lloufa.gestionstockback.service.CommandeFournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,27 +19,29 @@ public class CommandeFournisseurController implements CommandeFournisseurApi {
         this.commandeFournisseurService = commandeFournisseurService;
     }
 
-    public CommandeFournisseurDto save(CommandeFournisseurDto commandeFournisseurDto) {
-        return this.commandeFournisseurService.save(commandeFournisseurDto);
+    public ResponseEntity<CommandeFournisseurDto> save(CommandeFournisseurDto commandeFournisseurDto) {
+        return ResponseEntity.ok(this.commandeFournisseurService.save(commandeFournisseurDto));
     }
 
-    public CommandeFournisseurDto update(CommandeFournisseurDto commandeFournisseurDto) {
-        return this.commandeFournisseurService.save(commandeFournisseurDto);
+    public ResponseEntity<CommandeFournisseurDto> update(CommandeFournisseurDto commandeFournisseurDto) {
+        return ResponseEntity.ok(this.commandeFournisseurService.save(commandeFournisseurDto));
     }
 
-    public CommandeFournisseurDto findById(Integer id) {
-        return this.commandeFournisseurService.findById(id);
+    public ResponseEntity<CommandeFournisseurDto> findById(Integer id) {
+        return ResponseEntity.ok(this.commandeFournisseurService.findById(id));
     }
 
-    public CommandeFournisseurDto findByCode(String code) {
-        return this.commandeFournisseurService.findByCode(code);
+    public ResponseEntity<CommandeFournisseurDto> findByCode(String code) {
+        return ResponseEntity.ok(this.commandeFournisseurService.findByCode(code));
     }
 
-    public List<CommandeFournisseurDto> findAll() {
-        return this.commandeFournisseurService.findAll();
+    public ResponseEntity<List<CommandeFournisseurDto>> findAll() {
+        return ResponseEntity.ok(this.commandeFournisseurService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.commandeFournisseurService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

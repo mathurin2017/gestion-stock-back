@@ -7,4 +7,5 @@ import java.io.InputStream;
 public interface PhotoService {
 
     String save(InputStream photo, String title) throws FlickrException;
+
 }

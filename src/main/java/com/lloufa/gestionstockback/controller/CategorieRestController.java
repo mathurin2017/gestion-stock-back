@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.CategorieApi;
 import com.lloufa.gestionstockback.dto.CategoryDto;
 import com.lloufa.gestionstockback.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,27 +19,29 @@ public class CategorieRestController implements CategorieApi {
         this.categorieService = categorieService;
     }
 
-    public CategoryDto save(CategoryDto categoryDto) {
-        return this.categorieService.save(categoryDto);
+    public ResponseEntity<CategoryDto> save(CategoryDto categoryDto) {
+        return ResponseEntity.ok(this.categorieService.save(categoryDto));
     }
 
-    public CategoryDto update(CategoryDto categoryDto) {
-        return this.categorieService.save(categoryDto);
+    public ResponseEntity<CategoryDto> update(CategoryDto categoryDto) {
+        return ResponseEntity.ok(this.categorieService.save(categoryDto));
     }
 
-    public CategoryDto findById(Integer id) {
-        return this.categorieService.findById(id);
+    public ResponseEntity<CategoryDto> findById(Integer id) {
+        return ResponseEntity.ok(this.categorieService.findById(id));
     }
 
-    public CategoryDto findByCode(String code) {
-        return this.categorieService.findByCode(code);
+    public ResponseEntity<CategoryDto> findByCode(String code) {
+        return ResponseEntity.ok(this.categorieService.findByCode(code));
     }
 
-    public List<CategoryDto> findAll() {
-        return this.categorieService.findAll();
+    public ResponseEntity<List<CategoryDto>> findAll() {
+        return ResponseEntity.ok(this.categorieService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.categorieService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

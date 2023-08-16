@@ -20,4 +20,5 @@ public class VenteDto {
     private String commentaire;
 
     private List<LigneVenteDto> ligneVenteDtos;
+
 }

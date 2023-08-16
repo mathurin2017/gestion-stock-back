@@ -13,4 +13,5 @@ public interface FournisseurService {
     List<FournisseurDto> findAll();
 
     void delete(Integer id);
+
 }

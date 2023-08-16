@@ -29,4 +29,5 @@ public class UtilisateurDto {
     private EntrepriseDto entrepriseDto;
 
     private List<RoleDto> roleDtos;
+
 }

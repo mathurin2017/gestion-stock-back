@@ -22,4 +22,5 @@ public class CommandeFournisseurValidator {
 
         return errors;
     }
+
 }

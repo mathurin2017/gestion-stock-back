@@ -63,4 +63,5 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         EntrepriseDto entrepriseDto = findById(id);
         if (null != entrepriseDto) this.entrepriseRepository.delete(EntrepriseMapping.toEntity(entrepriseDto));
     }
+
 }

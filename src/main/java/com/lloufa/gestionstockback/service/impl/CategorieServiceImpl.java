@@ -75,4 +75,5 @@ public class CategorieServiceImpl implements CategorieService {
         CategoryDto categoryDto = findById(id);
         if (null != categoryDto) this.categorieRepository.delete(CategorieMapping.toEntity(categoryDto));
     }
+
 }

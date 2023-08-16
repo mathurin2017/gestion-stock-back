@@ -18,4 +18,5 @@ public class  LigneCommandeClientDto {
     private ArticleDto articleDto;
 
     private CommandeClientDto commandeClientDto;
+
 }

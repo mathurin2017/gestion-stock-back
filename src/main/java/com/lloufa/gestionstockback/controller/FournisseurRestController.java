@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.FournisseurApi;
 import com.lloufa.gestionstockback.dto.FournisseurDto;
 import com.lloufa.gestionstockback.service.FournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,23 +19,25 @@ public class FournisseurRestController implements FournisseurApi {
         this.fournisseurService = fournisseurService;
     }
 
-    public FournisseurDto save(FournisseurDto fournisseurDto) {
-        return this.fournisseurService.save(fournisseurDto);
+    public ResponseEntity<FournisseurDto> save(FournisseurDto fournisseurDto) {
+        return ResponseEntity.ok(this.fournisseurService.save(fournisseurDto));
     }
 
-    public FournisseurDto update(FournisseurDto fournisseurDto) {
-        return this.fournisseurService.save(fournisseurDto);
+    public ResponseEntity<FournisseurDto> update(FournisseurDto fournisseurDto) {
+        return ResponseEntity.ok(this.fournisseurService.save(fournisseurDto));
     }
 
-    public FournisseurDto findById(Integer id) {
-        return this.fournisseurService.findById(id);
+    public ResponseEntity<FournisseurDto> findById(Integer id) {
+        return ResponseEntity.ok(this.fournisseurService.findById(id));
     }
 
-    public List<FournisseurDto> findAll() {
-        return this.fournisseurService.findAll();
+    public ResponseEntity<List<FournisseurDto>> findAll() {
+        return ResponseEntity.ok(this.fournisseurService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.fournisseurService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

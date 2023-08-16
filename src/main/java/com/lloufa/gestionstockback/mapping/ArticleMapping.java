@@ -41,4 +41,5 @@ public class ArticleMapping {
 
         return article;
     }
+
 }

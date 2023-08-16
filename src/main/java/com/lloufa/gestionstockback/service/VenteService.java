@@ -15,4 +15,5 @@ public interface VenteService {
     List<VenteDto> findAll();
 
     void delete(Integer id);
+
 }

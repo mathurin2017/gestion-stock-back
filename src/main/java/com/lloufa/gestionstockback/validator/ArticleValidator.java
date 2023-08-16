@@ -24,4 +24,5 @@ public class ArticleValidator {
 
         return errors;
     }
+
 }

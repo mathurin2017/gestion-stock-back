@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.EntrepriseApi;
 import com.lloufa.gestionstockback.dto.EntrepriseDto;
 import com.lloufa.gestionstockback.service.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,23 +19,25 @@ public class EntrepriseRestController implements EntrepriseApi {
         this.entrepriseService = entrepriseService;
     }
 
-    public EntrepriseDto save(EntrepriseDto entrepriseDto) {
-        return this.entrepriseService.save(entrepriseDto);
+    public ResponseEntity<EntrepriseDto> save(EntrepriseDto entrepriseDto) {
+        return ResponseEntity.ok(this.entrepriseService.save(entrepriseDto));
     }
 
-    public EntrepriseDto update(EntrepriseDto entrepriseDto) {
-        return this.entrepriseService.save(entrepriseDto);
+    public ResponseEntity<EntrepriseDto> update(EntrepriseDto entrepriseDto) {
+        return ResponseEntity.ok(this.entrepriseService.save(entrepriseDto));
     }
 
-    public EntrepriseDto findById(Integer id) {
-        return this.entrepriseService.findById(id);
+    public ResponseEntity<EntrepriseDto> findById(Integer id) {
+        return ResponseEntity.ok(this.entrepriseService.findById(id));
     }
 
-    public List<EntrepriseDto> findAll() {
-        return this.entrepriseService.findAll();
+    public ResponseEntity<List<EntrepriseDto>> findAll() {
+        return ResponseEntity.ok(this.entrepriseService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.entrepriseService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

@@ -13,4 +13,5 @@ public interface UtilisateurService {
     List<UtilisateurDto> findAll();
 
     void delete(Integer id);
+
 }

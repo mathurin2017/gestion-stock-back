@@ -1,6 +1,5 @@
 package com.lloufa.gestionstockback.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,6 +23,6 @@ public class ClientDto {
 
     private String photo;
 
-    @JsonIgnore
     private List<CommandeClientDto> commandeClientDtos;
+
 }

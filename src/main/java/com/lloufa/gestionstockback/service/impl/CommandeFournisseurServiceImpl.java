@@ -105,4 +105,5 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         CommandeFournisseurDto commandeFournisseurDto = findById(id);
         if (null != commandeFournisseurDto) this.commandeFournisseurRepository.delete(CommandeFournisseurMapping.toEntity(commandeFournisseurDto));
     }
+
 }

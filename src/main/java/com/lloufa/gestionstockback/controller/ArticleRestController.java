@@ -4,6 +4,7 @@ import com.lloufa.gestionstockback.controller.api.ArticleApi;
 import com.lloufa.gestionstockback.dto.ArticleDto;
 import com.lloufa.gestionstockback.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,27 +19,29 @@ public class ArticleRestController implements ArticleApi {
         this.articleService = articleService;
     }
 
-    public ArticleDto save(ArticleDto articleDto) {
-        return this.articleService.save(articleDto);
+    public ResponseEntity<ArticleDto> save(ArticleDto articleDto) {
+        return ResponseEntity.ok(this.articleService.save(articleDto));
     }
 
-    public ArticleDto update(ArticleDto articleDto) {
-        return this.articleService.save(articleDto);
+    public ResponseEntity<ArticleDto> update(ArticleDto articleDto) {
+        return ResponseEntity.ok(this.articleService.save(articleDto));
     }
 
-    public ArticleDto findById(Integer id) {
-        return this.articleService.findById(id);
+    public ResponseEntity<ArticleDto> findById(Integer id) {
+        return ResponseEntity.ok(this.articleService.findById(id));
     }
 
-    public ArticleDto findByCode(String code) {
-        return this.articleService.findByCode(code);
+    public ResponseEntity<ArticleDto> findByCode(String code) {
+        return ResponseEntity.ok(this.articleService.findByCode(code));
     }
 
-    public List<ArticleDto> findAll() {
-        return this.articleService.findAll();
+    public ResponseEntity<List<ArticleDto>> findAll() {
+        return ResponseEntity.ok(this.articleService.findAll());
     }
 
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         this.articleService.delete(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

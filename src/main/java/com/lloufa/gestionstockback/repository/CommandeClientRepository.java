@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface CommandeClientRepository extends JpaRepository<CommandeClient, Integer> {
 
     Optional<CommandeClient> findCommandeClientByCode(String code);
+
 }

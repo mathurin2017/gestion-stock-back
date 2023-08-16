@@ -20,4 +20,5 @@ public class Adresse {
     private String codePostal;
 
     private String pays;
+
 }

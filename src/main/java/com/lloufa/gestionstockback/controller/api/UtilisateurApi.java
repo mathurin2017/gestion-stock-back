@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UtilisateurApi {
             @ApiResponse(code = 200, message = "L'objet utilisateur est crée"),
             @ApiResponse(code = 400, message = "L'objet utilisateur n'est pas valide")
     })
-    UtilisateurDto save(@RequestBody UtilisateurDto utilisateurDto);
+    ResponseEntity<UtilisateurDto> save(@RequestBody UtilisateurDto utilisateurDto);
 
     @ApiOperation(value = "Modifier un utilisateur", notes = "Cette méthode permet de modifier un utilisateur", response = UtilisateurDto.class)
     @ApiResponses(value = {
@@ -27,7 +28,7 @@ public interface UtilisateurApi {
             @ApiResponse(code = 400, message = "L'objet utilisateur n'est pas valide")
     })
     @PutMapping
-    UtilisateurDto update(@RequestBody UtilisateurDto utilisateurDto);
+    ResponseEntity<UtilisateurDto> update(@RequestBody UtilisateurDto utilisateurDto);
 
     @GetMapping(value = "{id}")
     @ApiOperation(value = "Rechercher un utilisateur", notes = "Cette méthode permet de rechercher un utilisateur par son ID", response = UtilisateurDto.class)
@@ -35,15 +36,16 @@ public interface UtilisateurApi {
             @ApiResponse(code = 200, message = "Le utilisateur a été trouvé dans la BDD"),
             @ApiResponse(code = 404, message = "Aucun utilisateur n'existe dans la BDD avec l'ID fourni")
     })
-    UtilisateurDto findById(@PathVariable Integer id);
+    ResponseEntity<UtilisateurDto> findById(@PathVariable Integer id);
 
     @GetMapping
     @ApiOperation(value = "Renvoi la liste des utilisateurs", notes = "Cette méthode permet de rechercher et renvoyer la liste des utilisateurs", responseContainer = "List<UtilisateurDto.class>")
     @ApiResponse(code = 200, message = "La liste des utilisateurs a été trouvée / Une liste dans la BDD")
-    List<UtilisateurDto> findAll();
+    ResponseEntity<List<UtilisateurDto>> findAll();
 
     @DeleteMapping(value = "{id}")
     @ApiOperation(value = "Rechercher un utilisateur", notes = "Cette méthode permet de supprimer un utilisateur par ID")
     @ApiResponse(code = 200, message = "L'utilisateur a été trouvé dans la BDD")
-    void delete(@PathVariable Integer id);
+    ResponseEntity<?> delete(@PathVariable Integer id);
+
 }

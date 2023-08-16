@@ -13,4 +13,5 @@ public interface MvtStkService {
     List<MvtStkDto> findAll();
 
     void delete(Integer id);
+
 }

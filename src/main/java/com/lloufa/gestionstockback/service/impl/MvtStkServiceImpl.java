@@ -63,4 +63,5 @@ public class MvtStkServiceImpl implements MvtStkService {
         MvtStkDto mvtStkDto = findById(id);
         if (null != mvtStkDto) this.mvtStkRepository.delete(MvtStkMapping.toEntity(mvtStkDto));
     }
+
 }

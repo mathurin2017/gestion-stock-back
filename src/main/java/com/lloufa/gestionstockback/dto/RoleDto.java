@@ -12,4 +12,5 @@ public class RoleDto {
     private String nom;
 
     private UtilisateurDto utilisateurDto;
+
 }

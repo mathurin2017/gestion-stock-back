@@ -26,4 +26,5 @@ public class CommandeClient extends AbstractEntity {
 
     @OneToMany(mappedBy = "commandeClient")
     private List<LigneCommandeClient> ligneCommandeClients;
+
 }
