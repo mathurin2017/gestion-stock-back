@@ -52,6 +52,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
+    public UtilisateurDto findByEmail(String email) {
+        if (null == email) {
+            log.error("User EMAIL is null");
+            return null;
+        }
+
+        return this.utilisateurRepository.findUtilisateurByEmail(email)
+                .map(UtilisateurMapping::fromEntity)
+                .orElseThrow(() -> new EntityNotFoundException("Aucun utilisateur avec EMAIL " + email + " n'a été trouvé dans la BDD", ErrorCode.UTILISATEUR_NOT_FOUND));
+    }
+
+    @Override
     public List<UtilisateurDto> findAll() {
         List<Utilisateur> utilisateurList = this.utilisateurRepository.findAll();
         log.error("Number utilisateur in BDD is {}", utilisateurList.size());
