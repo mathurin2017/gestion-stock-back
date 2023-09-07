@@ -12,17 +12,13 @@ public class UtilisateurValidator {
         List<String> errors = new ArrayList<>();
 
         if (null == utilisateurDto) {
-            errors.add("Veillez renseigner les champs de l'utilisateur");
+            errors.add("Veillez renseigner les champs obligatoire de l'utilisateur");
         } else {
             if (!StringUtils.hasLength(utilisateurDto.getNom())) errors.add("Veillez renseigner le nom de l'utilisateur");
             if (!StringUtils.hasLength(utilisateurDto.getPrenom())) errors.add("Veillez renseigner le prénom de l'utilisateur");
             if (!StringUtils.hasLength(utilisateurDto.getMotDePasse())) errors.add("Veillez renseigner le mot de passe de l'utilisateur");
             if (null == utilisateurDto.getDateDeNaissance()) errors.add("Veillez renseigner la date de l'utilisateur");
-            if (null == utilisateurDto.getAdresseDto()) {
-                errors.add("Veillez renseigner l'adresse de l'utilisateur");
-            } else {
-                errors.addAll(UtilsValidator.validateAdresse(utilisateurDto.getAdresseDto()));
-            }
+            errors.addAll(AdresseValidator.validate(utilisateurDto.getAdresseDto()));
         }
 
         return errors;

@@ -1,6 +1,6 @@
 package com.lloufa.gestionstockback.security.config;
 
-import com.lloufa.gestionstockback.Utils.ConstantEnum;
+import com.lloufa.gestionstockback.Utils.ConstantEnumUtils;
 import com.lloufa.gestionstockback.security.service.ApplicationUserDetailsService;
 import com.lloufa.gestionstockback.security.service.JwtService;
 import org.slf4j.MDC;
@@ -34,7 +34,7 @@ public class ApplicationDetailsService extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final String authHeader = request.getHeader(ConstantEnum.AUTHORIZATION_HEADER.getValue());
+        final String authHeader = request.getHeader(ConstantEnumUtils.AUTHORIZATION_HEADER.getValue());
 
         String userEmail = null;
         String token = null;
@@ -46,7 +46,7 @@ public class ApplicationDetailsService extends OncePerRequestFilter {
             idEntreprise = this.jwtService.extractIdEntreprise(token);
         }
 
-        if (StringUtils.hasLength(userEmail) && null == SecurityContextHolder.getContext()) {
+        if (StringUtils.hasLength(userEmail) && null == SecurityContextHolder.getContext().getAuthentication()) {
             UserDetails userDetails = this.applicationUserDetailsService.loadUserByUsername(userEmail);
 
             if (this.jwtService.validateToken(token, userDetails)) {
@@ -58,7 +58,7 @@ public class ApplicationDetailsService extends OncePerRequestFilter {
             }
         }
 
-        MDC.put(ConstantEnum.ID_ENNTREPRISE.getValue(), idEntreprise);
+        MDC.put(ConstantEnumUtils.ID_ENTREPRISE.getValue(), idEntreprise);
         filterChain.doFilter(request, response);
     }
 

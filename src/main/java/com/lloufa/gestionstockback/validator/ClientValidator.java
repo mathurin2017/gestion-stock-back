@@ -12,12 +12,13 @@ public class ClientValidator {
         List<String> errors = new ArrayList<>();
 
         if (null == clientDto) {
-            errors.add("Veillez renseigner les champs du client");
+            errors.add("Veillez renseigner les champs obligatoire du client");
         } else {
             if (!StringUtils.hasLength(clientDto.getNom())) errors.add("Veillez renseigner le nom du client");
             if (!StringUtils.hasLength(clientDto.getPrenom())) errors.add("Veillez renseigner le prénom du client");
             if (null == clientDto.getEmail()) errors.add("Veillez renseigner l'email du client");
             if (null == clientDto.getNumeroTelephone()) errors.add("Veillez renseigner le numéro de téléphone du client");
+            errors.addAll(AdresseValidator.validate(clientDto.getAdresseDto()));
         }
 
         return errors;

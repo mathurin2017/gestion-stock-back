@@ -15,6 +15,9 @@ public class MvtStkMapping {
                 .id(mvtStk.getId())
                 .dateMvt(mvtStk.getDateMvt())
                 .quantite(mvtStk.getQuantite())
+                .typeMvtStk(mvtStk.getTypeMvtStk())
+                .sourceMvtStk(mvtStk.getSourceMvtStk())
+                .idEntreprise(mvtStk.getIdEntreprise())
                 .articleDto(ArticleMapping.fromEntity(mvtStk.getArticle()))
                 .build();
     }
@@ -29,6 +32,9 @@ public class MvtStkMapping {
         mvtStk.setId(mvtStkDto.getId());
         mvtStk.setDateMvt(mvtStkDto.getDateMvt());
         mvtStk.setQuantite(mvtStkDto.getQuantite());
+        mvtStk.setTypeMvtStk(mvtStkDto.getTypeMvtStk());
+        mvtStk.setSourceMvtStk(mvtStkDto.getSourceMvtStk());
+        mvtStk.setIdEntreprise(mvtStkDto.getIdEntreprise());
         mvtStk.setArticle(ArticleMapping.toEntity(mvtStkDto.getArticleDto()));
 
         return mvtStk;

@@ -2,9 +2,9 @@ package com.lloufa.gestionstockback.exception;
 
 import lombok.Getter;
 
+@Getter
 public class EntityNotFoundException extends RuntimeException {
 
-    @Getter
     private ErrorCode errorCode;
 
     public EntityNotFoundException(String message) {

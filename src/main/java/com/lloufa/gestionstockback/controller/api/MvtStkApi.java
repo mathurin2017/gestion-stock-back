@@ -8,44 +8,56 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Api("mvt-stks-api")
-@RequestMapping("/mvt-stks")
+@RequestMapping("/mvtStks")
 public interface MvtStkApi {
 
-    @PostMapping
-    @ApiOperation(value = "Enregistrer un mvtStk", notes = "Cette méthode permet d'enregistrer un mvtStk", response = MvtStkDto.class)
+    @GetMapping(value = "/stockReel/{idArticle}")
+    @ApiOperation(value = "Renvoyer le nombre total de mvtStk", notes = "Cette méthode permet de renvoyer le nombre de mvtStk", response = BigDecimal.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre total de mvtStk a été trouvé dans la BDD"),
+            @ApiResponse(code = 400, message = "Aucun nombre mvtStk n'existe dans la BDD avec l'ID fourni")
+    })
+    ResponseEntity<BigDecimal> stockReelArticle(@PathVariable Integer idArticle);
+
+    @GetMapping(value = "/article/{idArticle}")
+    @ApiOperation(value = "Renvoi la liste des mvtStks id article", notes = "Cette méthode permet de rechercher la liste des mvtStks par Article ID", responseContainer = "List<MvtStkDto.class>")
+    @ApiResponse(code = 200, message = "La liste des mvtStks par IdArticle a été trouvée / Une liste dans la BDD")
+    ResponseEntity<List<MvtStkDto>> mvtStkArticle(@PathVariable Integer idArticle);
+
+    @PostMapping(value = "/entree")
+    @ApiOperation(value = "Enregistrer une entrée mvtStk", notes = "Cette méthode permet d'enregistrer une entrée mvtStk", response = MvtStkDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet mvtStk est crée"),
             @ApiResponse(code = 400, message = "L'objet mvtStk n'est pas valide")
     })
-    ResponseEntity<MvtStkDto> save(@RequestBody MvtStkDto mvtStkDto);
+    ResponseEntity<MvtStkDto> entreeStock(@RequestBody MvtStkDto mvtStkDto);
 
-    @ApiOperation(value = "Modifier un mvtStk", notes = "Cette méthode permet de modifier un mvtStk", response = MvtStkDto.class)
+    @PostMapping(value = "/sortie")
+    @ApiOperation(value = "Enregistrer une entrée mvtStk", notes = "Cette méthode permet d'enregistrer une sortie mvtStk", response = MvtStkDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'objet mvtStk est modifié"),
+            @ApiResponse(code = 200, message = "L'objet mvtStk est crée"),
             @ApiResponse(code = 400, message = "L'objet mvtStk n'est pas valide")
     })
-    @PutMapping
-    ResponseEntity<MvtStkDto> update(@RequestBody MvtStkDto mvtStkDto);
+    ResponseEntity<MvtStkDto> sortieStock(@RequestBody MvtStkDto mvtStkDto);
 
-    @GetMapping(value = "{id}")
-    @ApiOperation(value = "Rechercher un mvtStk", notes = "Cette méthode permet de rechercher un mvtStk par son ID", response = MvtStkDto.class)
+    @PostMapping(value = "/correctionPositive")
+    @ApiOperation(value = "Enregistrer une entrée mvtStk", notes = "Cette méthode permet d'enregistrer une correction positive mvtStk", response = MvtStkDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Le mvtStk a été trouvé dans la BDD"),
-            @ApiResponse(code = 404, message = "Aucun mvtStk n'existe dans la BDD avec l'ID fourni")
+            @ApiResponse(code = 200, message = "L'objet mvtStk est crée"),
+            @ApiResponse(code = 400, message = "L'objet mvtStk n'est pas valide")
     })
-    ResponseEntity<MvtStkDto> findById(@PathVariable Integer id);
+    ResponseEntity<MvtStkDto> correctionStockPositive(@RequestBody MvtStkDto mvtStkDto);
 
-    @GetMapping
-    @ApiOperation(value = "Renvoi la liste des mvtStks", notes = "Cette méthode permet de rechercher et renvoyer la liste des mvtStks", responseContainer = "List<MvtStkDto.class>")
-    @ApiResponse(code = 200, message = "La liste des mvtStks a été trouvée / Une liste dans la BDD")
-    ResponseEntity<List<MvtStkDto>> findAll();
-
-    @DeleteMapping(value = "{id}")
-    @ApiOperation(value = "Rechercher un mvtStk", notes = "Cette méthode permet de supprimer un mvtStk par ID")
-    @ApiResponse(code = 200, message = "Le mvtStk a été trouvé dans la BDD")
-    ResponseEntity<?> delete(@PathVariable Integer id);
+    @PostMapping(value = "/correctionNegative")
+    @ApiOperation(value = "Enregistrer une entrée mvtStk", notes = "Cette méthode permet d'enregistrer une correction négative mvtStk", response = MvtStkDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet mvtStk est crée"),
+            @ApiResponse(code = 400, message = "L'objet mvtStk n'est pas valide")
+    })
+    ResponseEntity<MvtStkDto> correctionStockNegative(@RequestBody MvtStkDto mvtStkDto);
 
 }

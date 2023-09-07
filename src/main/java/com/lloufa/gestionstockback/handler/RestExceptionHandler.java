@@ -3,6 +3,7 @@ package com.lloufa.gestionstockback.handler;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
+import com.lloufa.gestionstockback.exception.InvalidOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,6 +37,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .httpCode(badRequest.value())
                 .message(exception.getMessage())
                 .errors(exception.getErrors())
+                .build();
+
+        return new ResponseEntity<>(errorDto, badRequest);
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ErrorDto> handleException(InvalidOperationException exception, WebRequest webRequest) {
+        final HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+        final ErrorDto errorDto = ErrorDto.builder()
+                .errorCode(exception.getErrorCode())
+                .httpCode(badRequest.value())
+                .message(exception.getMessage())
                 .build();
 
         return new ResponseEntity<>(errorDto, badRequest);

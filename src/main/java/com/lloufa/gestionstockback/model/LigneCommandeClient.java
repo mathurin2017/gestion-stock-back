@@ -1,6 +1,9 @@
 package com.lloufa.gestionstockback.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,9 +18,7 @@ import java.math.BigDecimal;
 public class LigneCommandeClient extends AbstractEntity {
 
     private BigDecimal quantite;
-
     private BigDecimal prixUnitaire;
-
     private String idEntreprise;
 
     @ManyToOne

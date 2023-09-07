@@ -1,18 +1,24 @@
 package com.lloufa.gestionstockback.service.impl;
 
+import com.flickr4java.flickr.FlickrException;
 import com.lloufa.gestionstockback.dto.FournisseurDto;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
+import com.lloufa.gestionstockback.exception.InvalidOperationException;
 import com.lloufa.gestionstockback.mapping.FournisseurMapping;
 import com.lloufa.gestionstockback.model.Fournisseur;
+import com.lloufa.gestionstockback.repository.CommandeFournisseurRepository;
 import com.lloufa.gestionstockback.repository.FournisseurRepository;
 import com.lloufa.gestionstockback.service.FournisseurService;
+import com.lloufa.gestionstockback.service.PhotoService;
 import com.lloufa.gestionstockback.validator.FournisseurValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,10 +28,14 @@ import java.util.stream.Collectors;
 public class FournisseurServiceImpl implements FournisseurService {
 
     private final FournisseurRepository fournisseurRepository;
+    private final PhotoService photoService;
+    private final CommandeFournisseurRepository commandeFournisseurRepository;
 
     @Autowired
-    public FournisseurServiceImpl(FournisseurRepository fournisseurRepository) {
+    public FournisseurServiceImpl(FournisseurRepository fournisseurRepository, PhotoService photoService, CommandeFournisseurRepository commandeFournisseurRepository) {
         this.fournisseurRepository = fournisseurRepository;
+        this.photoService = photoService;
+        this.commandeFournisseurRepository = commandeFournisseurRepository;
     }
 
     @Override
@@ -38,6 +48,16 @@ public class FournisseurServiceImpl implements FournisseurService {
         Fournisseur fournisseur = this.fournisseurRepository.save(FournisseurMapping.toEntity(fournisseurDto));
 
         return FournisseurMapping.fromEntity(fournisseur);
+    }
+
+    @Override
+    public FournisseurDto savePhoto(Integer id, InputStream photo, String title) throws FlickrException {
+        FournisseurDto fournisseurDto = this.findById(id);
+        String urlPhoto = this.photoService.save(photo, title);
+        if (!StringUtils.hasLength(urlPhoto)) throw new InvalidOperationException("Erreur lors de l'enregistrement de la photo du fournisseur", ErrorCode.UPDATE_PHOTO_EXCEPTION);
+        fournisseurDto.setPhoto(urlPhoto);
+
+        return this.save(fournisseurDto);
     }
 
     @Override
@@ -61,8 +81,12 @@ public class FournisseurServiceImpl implements FournisseurService {
 
     @Override
     public void delete(Integer id) {
-        FournisseurDto fournisseurDto = findById(id);
-        if (null != fournisseurDto) this.fournisseurRepository.delete(FournisseurMapping.toEntity(fournisseurDto));
+        this.findById(id);
+
+        Optional.ofNullable(this.commandeFournisseurRepository.findAllByFournisseurId(id))
+                .orElseThrow(() -> new InvalidOperationException("Impossible de supprimer un fournisseur qui a déjà des commandes fournisseurs", ErrorCode.FOURNISSEUR_ALREADY_IN_USE));
+
+        this.fournisseurRepository.deleteById(id);
     }
 
 }

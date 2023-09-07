@@ -16,11 +16,9 @@ import java.time.Instant;
 public class MvtStk extends AbstractEntity {
 
     private Instant dateMvt;
-
     private BigDecimal quantite;
-
-    private TypeMvt typeMvt;
-
+    private TypeMvtStk typeMvtStk;
+    private SourceMvtStk sourceMvtStk;
     private String idEntreprise;
 
     @ManyToOne

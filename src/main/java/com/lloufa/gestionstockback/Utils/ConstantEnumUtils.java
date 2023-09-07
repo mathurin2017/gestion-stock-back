@@ -3,14 +3,14 @@ package com.lloufa.gestionstockback.Utils;
 import lombok.Getter;
 
 @Getter
-public enum ConstantEnum {
+public enum ConstantEnumUtils {
 
-    ID_ENNTREPRISE("idEntreprise"),
+    ID_ENTREPRISE("id_entreprise"),
     AUTHORIZATION_HEADER("Authorization");
 
     private final String value;
 
-    ConstantEnum(String value) {
+    ConstantEnumUtils(String value) {
         this.value = value;
     }
 

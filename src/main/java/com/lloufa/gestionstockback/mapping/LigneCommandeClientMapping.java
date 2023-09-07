@@ -8,7 +8,7 @@ public class LigneCommandeClientMapping {
     public static LigneCommandeClientDto fromEntity(LigneCommandeClient ligneCommandeClient) {
         if (null == ligneCommandeClient) {
             return null;
-            // TODO throw an execption
+            // TODO throw an exeption
         }
 
         return LigneCommandeClientDto.builder()
@@ -16,6 +16,7 @@ public class LigneCommandeClientMapping {
                 .quantite(ligneCommandeClient.getQuantite())
                 .prixUnitaire(ligneCommandeClient.getPrixUnitaire())
                 .articleDto(ArticleMapping.fromEntity(ligneCommandeClient.getArticle()))
+                .idEntreprise(ligneCommandeClient.getIdEntreprise())
                 .commandeClientDto(CommandeClientMapping.fromEntity(ligneCommandeClient.getCommandeClient()))
                 .build();
     }
@@ -23,7 +24,7 @@ public class LigneCommandeClientMapping {
     public static LigneCommandeClient toEntity(LigneCommandeClientDto ligneCommandeClientDto) {
         if (null == ligneCommandeClientDto) {
             return null;
-            // TODO throw an execption
+            // TODO throw an exeption
         }
 
         LigneCommandeClient ligneCommandeClient = new LigneCommandeClient();
@@ -31,6 +32,7 @@ public class LigneCommandeClientMapping {
         ligneCommandeClient.setQuantite(ligneCommandeClientDto.getQuantite());
         ligneCommandeClient.setPrixUnitaire(ligneCommandeClientDto.getPrixUnitaire());
         ligneCommandeClient.setArticle(ArticleMapping.toEntity(ligneCommandeClientDto.getArticleDto()));
+        ligneCommandeClient.setIdEntreprise(ligneCommandeClientDto.getIdEntreprise());
         ligneCommandeClient.setCommandeClient(CommandeClientMapping.toEntity(ligneCommandeClientDto.getCommandeClientDto()));
 
         return ligneCommandeClient;

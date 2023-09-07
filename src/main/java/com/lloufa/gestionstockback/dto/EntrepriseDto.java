@@ -10,23 +10,14 @@ import java.util.List;
 public class EntrepriseDto {
 
     private Integer id;
-
     private String nom;
-
     private String description;
-
     private AdresseDto adresseDto;
-
     private String codeFiscal;
-
     private String photo;
-
     private String email;
-
     private String numeroTelephone;
-
     private String siteWeb;
-
     private List<UtilisateurDto> utilisateurDtos;
 
 }

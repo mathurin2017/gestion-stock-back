@@ -1,8 +1,9 @@
 package com.lloufa.gestionstockback.validator;
 
 import com.lloufa.gestionstockback.dto.MvtStkDto;
-import com.lloufa.gestionstockback.dto.VenteDto;
+import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +12,14 @@ public class MvtStkValidator {
     public static List<String> validate(MvtStkDto mvtStkDto) {
         List<String> errors = new ArrayList<>();
 
-        /*if (null == commandeClientDto) {
-            errors.add("Veillez renseigner les champs de la commande du client");
+        if (null == mvtStkDto) {
+            errors.add("Veillez renseigner les champs obligatoire du mvtStk");
         } else {
-            if (!StringUtils.hasLength(commandeClientDto.getCode())) errors.add("Veillez renseigner le nom du client");
-            if (!StringUtils.hasLength(commandeClientDto.getPrenom())) errors.add("Veillez renseigner le prénom du client");
-            if (null == commandeClientDto.getEmail()) errors.add("Veillez renseigner l'email du client");
-            if (null == commandeClientDto.getNumeroTelephone()) errors.add("Veillez renseigner le numéro de téléphone du client");
-        }*/
+            if (!StringUtils.hasLength(mvtStkDto.getDateMvt().toString())) errors.add("Veillez renseigner la date du mvtStk");
+            if (null == mvtStkDto.getQuantite() || 0 == mvtStkDto.getQuantite().compareTo(BigDecimal.ZERO)) errors.add("Veillez renseigner la quantité du mvtStk");
+            if (null == mvtStkDto.getArticleDto() || null == mvtStkDto.getArticleDto().getId()) errors.add("Veillez renseigner l'article du mvtStk");
+            if (!StringUtils.hasLength(mvtStkDto.getTypeMvtStk().name())) errors.add("Veillez renseigner le type du mvtStk");
+        }
 
         return errors;
     }

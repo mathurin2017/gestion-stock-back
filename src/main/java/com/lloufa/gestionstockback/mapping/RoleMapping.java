@@ -14,7 +14,7 @@ public class RoleMapping {
         return RoleDto.builder()
                 .id(role.getId())
                 .nom(role.getNom())
-                .utilisateurDto(UtilisateurMapping.fromEntity(role.getUtilisateur()))
+                // .utilisateurDto(UtilisateurMapping.fromEntity(role.getUtilisateur()))
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class RoleMapping {
         Role role = new Role();
         role.setId(roleDto.getId());
         role.setNom(roleDto.getNom());
-        role.setUtilisateur(UtilisateurMapping.toEntity(roleDto.getUtilisateurDto()));
+        // role.setUtilisateur(UtilisateurMapping.toEntity(roleDto.getUtilisateurDto()));
 
         return role;
     }

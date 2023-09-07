@@ -23,18 +23,22 @@ public class VenteRestController implements VenteApi {
         return ResponseEntity.ok(this.venteService.save(venteDto));
     }
 
+    @Override
     public ResponseEntity<VenteDto> update(VenteDto venteDto) {
         return ResponseEntity.ok(this.venteService.save(venteDto));
     }
 
+    @Override
     public ResponseEntity<VenteDto> findById(Integer id) {
         return ResponseEntity.ok(this.venteService.findById(id));
     }
 
+    @Override
     public ResponseEntity<List<VenteDto>> findAll() {
         return ResponseEntity.ok(this.venteService.findAll());
     }
 
+    @Override
     public ResponseEntity<?> delete(Integer id) {
         this.venteService.delete(id);
         return ResponseEntity.noContent().build();

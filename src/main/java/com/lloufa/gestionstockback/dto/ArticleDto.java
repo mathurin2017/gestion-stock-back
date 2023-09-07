@@ -11,27 +11,16 @@ import java.util.List;
 public class ArticleDto {
 
     private Integer id;
-
     private String code;
-
     private String designation;
-
     private BigDecimal prixUnitaireHt;
-
     private BigDecimal tauxTva;
-
     private BigDecimal prixUnitaireTtc;
-
     private String photo;
-
     private CategoryDto categoryDto;
-
     private List<LigneVenteDto> ligneVenteDtos;
-
     private List<LigneCommandeClientDto> ligneCommandeClientDtos;
-
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurDtos;
-
     private List<MvtStkDto> mvtStkDtos;
 
 }

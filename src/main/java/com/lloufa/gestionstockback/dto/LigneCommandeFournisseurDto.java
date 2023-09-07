@@ -10,13 +10,10 @@ import java.math.BigDecimal;
 public class LigneCommandeFournisseurDto {
 
     private Integer id;
-
     private BigDecimal quantite;
-
     private BigDecimal prixUnitaire;
-
     private ArticleDto articleDto;
-
+    private String idEntreprise;
     private CommandeFournisseurDto commandeFournisseurDto;
 
 }

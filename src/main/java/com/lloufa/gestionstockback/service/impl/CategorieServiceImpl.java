@@ -4,9 +4,11 @@ import com.lloufa.gestionstockback.dto.CategoryDto;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
+import com.lloufa.gestionstockback.exception.InvalidOperationException;
 import com.lloufa.gestionstockback.mapping.CategorieMapping;
 import com.lloufa.gestionstockback.model.Category;
 import com.lloufa.gestionstockback.repository.CategorieRepository;
+import com.lloufa.gestionstockback.service.ArticleService;
 import com.lloufa.gestionstockback.service.CategorieService;
 import com.lloufa.gestionstockback.validator.CategorieValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,10 +24,12 @@ import java.util.stream.Collectors;
 public class CategorieServiceImpl implements CategorieService {
 
     private final CategorieRepository categorieRepository;
+    private final ArticleService articleService;
 
     @Autowired
-    public CategorieServiceImpl(CategorieRepository categorieRepository) {
+    public CategorieServiceImpl(CategorieRepository categorieRepository, ArticleService articleService) {
         this.categorieRepository = categorieRepository;
+        this.articleService = articleService;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class CategorieServiceImpl implements CategorieService {
         List<String> errors = CategorieValidator.validate(categoryDto);
         if (!errors.isEmpty()) {
             log.error("Category is not valid {}", categoryDto);
-            throw new InvalidEntityException("La catégorie n'est pas valide ", ErrorCode.CATEGORIE_NOT_VALID, errors);
+            throw new InvalidEntityException("La catégorie n'est pas valide ", ErrorCode.CATEGORY_NOT_VALID, errors);
         }
         Category category = this.categorieRepository.save(CategorieMapping.toEntity(categoryDto));
 
@@ -48,7 +53,7 @@ public class CategorieServiceImpl implements CategorieService {
 
         return this.categorieRepository.findById(id)
                 .map(CategorieMapping::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException("Aucune catégorie avec ID " + id + " n'a été trouvée dans la BDD", ErrorCode.CATEGORIE_NOT_FOUND));
+                .orElseThrow(() -> new EntityNotFoundException("Aucune catégorie avec ID " + id + " n'a été trouvée dans la BDD", ErrorCode.CATEGORY_NOT_FOUND));
     }
 
     @Override
@@ -60,7 +65,7 @@ public class CategorieServiceImpl implements CategorieService {
 
         return this.categorieRepository.findCategoryByCode(code)
                 .map(CategorieMapping::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException("Aucune catégorie avec le CODE " + code + " n'a été trouvée dans la BDD", ErrorCode.CATEGORIE_NOT_FOUND));
+                .orElseThrow(() -> new EntityNotFoundException("Aucune catégorie avec le CODE " + code + " n'a été trouvée dans la BDD", ErrorCode.CATEGORY_NOT_FOUND));
     }
 
     @Override
@@ -72,8 +77,12 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public void delete(Integer id) {
-        CategoryDto categoryDto = findById(id);
-        if (null != categoryDto) this.categorieRepository.delete(CategorieMapping.toEntity(categoryDto));
+        this.findById(id);
+
+        Optional.ofNullable(this.articleService.findAllArticleByIdCategorie(id))
+                .orElseThrow(() -> new InvalidOperationException("Impossible de supprimer une catégorie déjà utiliser dans des articles", ErrorCode.CATEGORY_ALREADY_IN_USE));
+
+        this.categorieRepository.deleteById(id);
     }
 
 }

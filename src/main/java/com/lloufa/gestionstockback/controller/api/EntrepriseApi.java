@@ -1,5 +1,7 @@
 package com.lloufa.gestionstockback.controller.api;
 
+import com.flickr4java.flickr.FlickrException;
+import com.lloufa.gestionstockback.dto.ArticleDto;
 import com.lloufa.gestionstockback.dto.EntrepriseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -7,7 +9,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Api("entreprises-api")
@@ -21,6 +25,14 @@ public interface EntrepriseApi {
             @ApiResponse(code = 400, message = "L'objet entreprise n'est pas valide")
     })
     ResponseEntity<EntrepriseDto> save(@RequestBody EntrepriseDto entrepriseDto);
+
+    @PostMapping(value = "/photo/{id}/{title}")
+    @ApiOperation(value = "Enregistrer une photo entreprise", notes = "Cette méthode permet d'enregistrer une photo entreprise", response = ArticleDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet entreprise est crée"),
+            @ApiResponse(code = 400, message = "L'objet entreprise n'est pas valide")
+    })
+    ResponseEntity<EntrepriseDto> savePhoto(@PathVariable Integer id, @RequestPart("file") MultipartFile photo, @PathVariable String title) throws IOException, FlickrException;
 
     @ApiOperation(value = "Modifier une entreprise", notes = "Cette méthode permet de modifier une entreprise", response = EntrepriseDto.class)
     @ApiResponses(value = {

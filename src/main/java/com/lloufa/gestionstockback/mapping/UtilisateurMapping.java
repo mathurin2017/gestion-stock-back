@@ -23,7 +23,7 @@ public class UtilisateurMapping {
                 .adresseDto(AdresseMapping.fromEntity(utilisateur.getAdresse()))
                 .photo(utilisateur.getPhoto())
                 .entrepriseDto(EntrepriseMapping.fromEntity(utilisateur.getEntreprise()))
-                .roleDtos(null != utilisateur.getRoles() ? utilisateur.getRoles().stream().map(RoleMapping::fromEntity).collect(Collectors.toList()) : null)
+                // .roleDtos(null != utilisateur.getRoles() ? utilisateur.getRoles().stream().map(RoleMapping::fromEntity).collect(Collectors.toList()) : null)
                 .build();
     }
 
@@ -43,7 +43,7 @@ public class UtilisateurMapping {
         utilisateur.setAdresse(AdresseMapping.toEntity(utilisateurDto.getAdresseDto()));
         utilisateur.setPhoto(utilisateurDto.getPhoto());
         utilisateur.setEntreprise(EntrepriseMapping.toEntity(utilisateurDto.getEntrepriseDto()));
-        utilisateur.setRoles(null != utilisateurDto.getRoleDtos() ? utilisateurDto.getRoleDtos().stream().map(RoleMapping::toEntity).collect(Collectors.toList()) : null);
+        // utilisateur.setRoles(null != utilisateurDto.getRoleDtos() ? utilisateurDto.getRoleDtos().stream().map(RoleMapping::toEntity).collect(Collectors.toList()) : null);
 
         return utilisateur;
     }

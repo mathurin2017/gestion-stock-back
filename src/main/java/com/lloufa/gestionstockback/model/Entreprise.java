@@ -15,21 +15,15 @@ import java.util.List;
 public class Entreprise  extends AbstractEntity {
 
     private String nom;
-
     private String description;
+    private String codeFiscal;
+    private String photo;
+    private String email;
+    private String numeroTelephone;
+    private String siteWeb;
 
     @Embedded
     private Adresse adresse;
-
-    private String codeFiscal;
-
-    private String photo;
-
-    private String email;
-
-    private String numeroTelephone;
-
-    private String siteWeb;
 
     @OneToMany(mappedBy = "entreprise")
     private List<Utilisateur> utilisateurs;

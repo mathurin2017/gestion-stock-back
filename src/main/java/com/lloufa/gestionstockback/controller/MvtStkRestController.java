@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -19,25 +20,34 @@ public class MvtStkRestController implements MvtStkApi {
         this.mvtStkService = mvtStkService;
     }
 
-    public ResponseEntity<MvtStkDto> save(MvtStkDto mvtStkDto) {
-        return ResponseEntity.ok(this.mvtStkService.save(mvtStkDto));
+    @Override
+    public ResponseEntity<BigDecimal> stockReelArticle(Integer idArticle) {
+        return ResponseEntity.ok(this.mvtStkService.stockReelArticle(idArticle));
     }
 
-    public ResponseEntity<MvtStkDto> update(MvtStkDto mvtStkDto) {
-        return ResponseEntity.ok(this.mvtStkService.save(mvtStkDto));
+    @Override
+    public ResponseEntity<List<MvtStkDto>> mvtStkArticle(Integer idArticle) {
+        return ResponseEntity.ok(this.mvtStkService.mvtStkArticle(idArticle));
     }
 
-    public ResponseEntity<MvtStkDto> findById(Integer id) {
-        return ResponseEntity.ok(this.mvtStkService.findById(id));
+    @Override
+    public ResponseEntity<MvtStkDto> entreeStock(MvtStkDto mvtStkDto) {
+        return ResponseEntity.ok(this.mvtStkService.entreeStock(mvtStkDto));
     }
 
-    public ResponseEntity<List<MvtStkDto>> findAll() {
-        return ResponseEntity.ok(this.mvtStkService.findAll());
+    @Override
+    public ResponseEntity<MvtStkDto> sortieStock(MvtStkDto mvtStkDto) {
+        return ResponseEntity.ok(this.mvtStkService.sortieStock(mvtStkDto));
     }
 
-    public ResponseEntity<?> delete(Integer id) {
-        this.mvtStkService.delete(id);
-        return ResponseEntity.noContent().build();
+    @Override
+    public ResponseEntity<MvtStkDto> correctionStockPositive(MvtStkDto mvtStkDto) {
+        return ResponseEntity.ok(this.mvtStkService.correctionStockPositive(mvtStkDto));
+    }
+
+    @Override
+    public ResponseEntity<MvtStkDto> correctionStockNegative(MvtStkDto mvtStkDto) {
+        return ResponseEntity.ok(this.mvtStkService.correctionStockNegative(mvtStkDto));
     }
 
 }

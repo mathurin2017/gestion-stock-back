@@ -15,19 +15,14 @@ import java.util.List;
 public class Utilisateur extends AbstractEntity {
 
     private String nom;
-
     private String prenom;
-
     private String email;
-
     private Instant dateDeNaissance;
-
     private String motDePasse;
+    private String photo;
 
     @Embedded
     private Adresse adresse;
-
-    private String photo;
 
     @ManyToOne
     @JoinColumn(name = "id_entreprise")

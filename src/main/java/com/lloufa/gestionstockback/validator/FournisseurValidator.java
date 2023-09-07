@@ -18,6 +18,7 @@ public class FournisseurValidator {
             if (!StringUtils.hasLength(fournisseurDto.getPrenom())) errors.add("Veillez renseigner le prénom du fournisseur");
             if (null == fournisseurDto.getEmail()) errors.add("Veillez renseigner l'email du fournisseur");
             if (null == fournisseurDto.getNumeroTelephone()) errors.add("Veillez renseigner le numéro de téléphone du fournisseur");
+            errors.addAll(AdresseValidator.validate(fournisseurDto.getAdresseDto()));
         }
 
         return errors;

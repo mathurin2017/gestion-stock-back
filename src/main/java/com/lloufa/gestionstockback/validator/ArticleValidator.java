@@ -12,7 +12,7 @@ public class ArticleValidator {
         List<String> errors = new ArrayList<>();
 
         if (null == articleDto) {
-            errors.add("Veillez renseigner les champs de l'article");
+            errors.add("Veillez renseigner les champs obligatoire de l'article");
         } else {
             if (!StringUtils.hasLength(articleDto.getCode())) errors.add("Veillez renseigner le code de l'article");
             if (!StringUtils.hasLength(articleDto.getDesignation())) errors.add("Veillez renseigner la désignation de l'article");

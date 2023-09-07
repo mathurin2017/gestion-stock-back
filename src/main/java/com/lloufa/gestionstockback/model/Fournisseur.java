@@ -15,17 +15,13 @@ import java.util.List;
 public class Fournisseur extends AbstractEntity {
 
     private String nom;
-
     private String prenom;
+    private String email;
+    private String numeroTelephone;
+    private String photo;
 
     @Embedded
     private Adresse adresse;
-
-    private String email;
-
-    private String numeroTelephone;
-
-    private String photo;
 
     @OneToMany(mappedBy = "fournisseur")
     private List<CommandeFournisseur> commandeFournisseurs;

@@ -1,6 +1,7 @@
 package com.lloufa.gestionstockback.dto;
 
-import com.lloufa.gestionstockback.model.TypeMvt;
+import com.lloufa.gestionstockback.model.SourceMvtStk;
+import com.lloufa.gestionstockback.model.TypeMvtStk;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,13 +13,11 @@ import java.time.Instant;
 public class MvtStkDto {
 
     private Integer id;
-
     private Instant dateMvt;
-
     private BigDecimal quantite;
-
-    private TypeMvt typeMvt;
-
+    private TypeMvtStk typeMvtStk;
+    private SourceMvtStk sourceMvtStk;
+    private String idEntreprise;
     private ArticleDto articleDto;
 
 }

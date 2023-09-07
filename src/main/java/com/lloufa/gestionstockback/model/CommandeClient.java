@@ -17,9 +17,8 @@ import java.util.List;
 public class CommandeClient extends AbstractEntity {
 
     private String code;
-
     private Instant dateCommande;
-
+    private EtatCommande etatCommande;
     private String idEntreprise;
 
     @ManyToOne

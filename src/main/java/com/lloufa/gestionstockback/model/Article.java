@@ -17,17 +17,11 @@ import java.util.List;
 public class Article extends AbstractEntity {
 
     private String code;
-
     private String designation;
-
     private BigDecimal prixUnitaireHt;
-
     private BigDecimal tauxTva;
-
     private BigDecimal prixUnitaireTtc;
-
     private String photo;
-
     private String idEntreprise;
 
     @ManyToOne

@@ -1,16 +1,12 @@
 package com.lloufa.gestionstockback.config;
 
-import com.lloufa.gestionstockback.Utils.ConstantEnum;
-import springfox.documentation.service.AuthorizationScope;
+import com.lloufa.gestionstockback.Utils.ConstantEnumUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.SecurityReference;
-import springfox.documentation.service.SecurityScheme;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -28,8 +24,8 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(this.apiInfo())
                 .groupName("REST API V1")
-                .securityContexts(Collections.singletonList(securityContext()))
-                .securitySchemes(Collections.singletonList(apiKey()))
+                .securityContexts(Collections.singletonList(this.securityContext()))
+                .securitySchemes(Collections.singletonList(this.apiKey()))
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lloufa.gestionstockback"))
@@ -37,12 +33,19 @@ public class SwaggerConfiguration {
                 .build();
     }
 
-    private SecurityScheme apiKey() {
-        return new ApiKey("JWT", ConstantEnum.AUTHORIZATION_HEADER.getValue(), "header");
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .description("Gestion de stock API documentation")
+                .title("Gestion de stock REST API")
+                .build();
     }
 
     private SecurityContext securityContext() {
-        return SecurityContext.builder().securityReferences(defaultAuth()).build();
+        return SecurityContext.builder().securityReferences(this.defaultAuth()).build();
+    }
+
+    private SecurityScheme apiKey() {
+        return new ApiKey("JWT", ConstantEnumUtils.AUTHORIZATION_HEADER.getValue(), "header");
     }
 
     private List<SecurityReference> defaultAuth() {
@@ -51,13 +54,6 @@ public class SwaggerConfiguration {
         authorizationScopes[0] = authorizationScope;
 
         return Collections.singletonList(new SecurityReference("JWT", authorizationScopes));
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .description("Gestion de stock API documentation")
-                .title("Gestion de stock REST API")
-                .build();
     }
 
 }

@@ -1,19 +1,27 @@
 package com.lloufa.gestionstockback.service.impl;
 
+import com.flickr4java.flickr.FlickrException;
 import com.lloufa.gestionstockback.dto.ClientDto;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
+import com.lloufa.gestionstockback.exception.InvalidOperationException;
 import com.lloufa.gestionstockback.mapping.ClientMapping;
 import com.lloufa.gestionstockback.model.Client;
 import com.lloufa.gestionstockback.repository.ClientRepository;
+import com.lloufa.gestionstockback.repository.CommandeClientRepository;
 import com.lloufa.gestionstockback.service.ClientService;
+import com.lloufa.gestionstockback.service.CommandeClientService;
+import com.lloufa.gestionstockback.service.PhotoService;
 import com.lloufa.gestionstockback.validator.ClientValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,10 +29,14 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final PhotoService photoService;
+    private final CommandeClientRepository commandeClientRepository;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, PhotoService photoService, CommandeClientRepository commandeClientRepository) {
         this.clientRepository = clientRepository;
+        this.photoService = photoService;
+        this.commandeClientRepository = commandeClientRepository;
     }
 
     @Override
@@ -37,6 +49,16 @@ public class ClientServiceImpl implements ClientService {
         Client client = this.clientRepository.save(ClientMapping.toEntity(clientDto));
 
         return ClientMapping.fromEntity(client);
+    }
+
+    @Override
+    public ClientDto savePhoto(Integer id, InputStream photo, String title) throws FlickrException {
+        ClientDto clientDto = this.findById(id);
+        String urlPhoto = this.photoService.save(photo, title);
+        if (!StringUtils.hasLength(urlPhoto)) throw new InvalidOperationException("Erreur lors de l'enregistrement de la photo du client", ErrorCode.UPDATE_PHOTO_EXCEPTION);
+        clientDto.setPhoto(urlPhoto);
+
+        return this.save(clientDto);
     }
 
     @Override
@@ -60,8 +82,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void delete(Integer id) {
-        ClientDto clientDto = findById(id);
-        if (null != clientDto) this.clientRepository.delete(ClientMapping.toEntity(clientDto));
+        this.findById(id);
+
+        Optional.ofNullable(this.commandeClientRepository.findAllByClientId(id))
+                .orElseThrow(() -> new InvalidOperationException("Impossible de supprimer un client qui a déjà des commandes clients", ErrorCode.CLIENT_ALREADY_IN_USE));
+
+        this.clientRepository.deleteById(id);
     }
 
 }

@@ -106,6 +106,7 @@
 							<springmvc>true</springmvc>
 							<locations>
 								<location>com.lloufa.gestionstockback.controller</location>
+								<location>com.lloufa.gestionstockback.security.controller</location>
 							</locations>
 							<basePath>http://localhost:8081/gestion-stock/api</basePath>
 							<info>

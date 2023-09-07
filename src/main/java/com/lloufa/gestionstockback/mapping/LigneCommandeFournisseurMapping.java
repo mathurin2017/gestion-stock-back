@@ -15,6 +15,7 @@ public class LigneCommandeFournisseurMapping {
                 .id(ligneCommandeFournisseur.getId())
                 .quantite(ligneCommandeFournisseur.getQuantite())
                 .prixUnitaire(ligneCommandeFournisseur.getPrixUnitaire())
+                .idEntreprise(ligneCommandeFournisseur.getIdEntreprise())
                 .articleDto(ArticleMapping.fromEntity(ligneCommandeFournisseur.getArticle()))
                 .commandeFournisseurDto(CommandeFournisseurMapping.fromEntity(ligneCommandeFournisseur.getCommandeFournisseur()))
                 .build();
@@ -31,6 +32,7 @@ public class LigneCommandeFournisseurMapping {
         ligneCommandeFournisseur.setQuantite(ligneCommandeFournisseurDto.getQuantite());
         ligneCommandeFournisseur.setPrixUnitaire(ligneCommandeFournisseurDto.getPrixUnitaire());
         ligneCommandeFournisseur.setArticle(ArticleMapping.toEntity(ligneCommandeFournisseurDto.getArticleDto()));
+        ligneCommandeFournisseur.setIdEntreprise(ligneCommandeFournisseurDto.getIdEntreprise());
         ligneCommandeFournisseur.setCommandeFournisseur(CommandeFournisseurMapping.toEntity(ligneCommandeFournisseurDto.getCommandeFournisseurDto()));
 
         return ligneCommandeFournisseur;

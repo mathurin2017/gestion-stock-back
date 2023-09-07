@@ -15,6 +15,8 @@ public class LigneVenteMapping {
                 .id(ligneVente.getId())
                 .quantite(ligneVente.getQuantite())
                 .prixUnitaire(ligneVente.getPrixUnitaire())
+                .articleDto(ArticleMapping.fromEntity(ligneVente.getArticle()))
+                .idEntreprise(ligneVente.getIdEntreprise())
                 .venteDto(VenteMapping.fromEntity(ligneVente.getVente()))
                 .build();
     }
@@ -29,6 +31,8 @@ public class LigneVenteMapping {
         ligneVente.setId(ligneVenteDto.getId());
         ligneVente.setQuantite(ligneVenteDto.getQuantite());
         ligneVente.setPrixUnitaire(ligneVenteDto.getPrixUnitaire());
+        ligneVente.setArticle(ArticleMapping.toEntity(ligneVenteDto.getArticleDto()));
+        ligneVente.setIdEntreprise(ligneVenteDto.getIdEntreprise());
         ligneVente.setVente(VenteMapping.toEntity(ligneVenteDto.getVenteDto()));
 
         return ligneVente;

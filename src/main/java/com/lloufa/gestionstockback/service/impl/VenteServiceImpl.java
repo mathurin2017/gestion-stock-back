@@ -1,24 +1,31 @@
 package com.lloufa.gestionstockback.service.impl;
 
 import com.lloufa.gestionstockback.dto.LigneVenteDto;
+import com.lloufa.gestionstockback.dto.MvtStkDto;
 import com.lloufa.gestionstockback.dto.VenteDto;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
+import com.lloufa.gestionstockback.exception.InvalidOperationException;
 import com.lloufa.gestionstockback.mapping.LigneVenteMapping;
 import com.lloufa.gestionstockback.mapping.VenteMapping;
 import com.lloufa.gestionstockback.model.LigneVente;
+import com.lloufa.gestionstockback.model.SourceMvtStk;
+import com.lloufa.gestionstockback.model.TypeMvtStk;
 import com.lloufa.gestionstockback.model.Vente;
 import com.lloufa.gestionstockback.repository.LigneVenteRepository;
 import com.lloufa.gestionstockback.repository.VenteRepository;
 import com.lloufa.gestionstockback.service.ArticleService;
+import com.lloufa.gestionstockback.service.MvtStkService;
 import com.lloufa.gestionstockback.service.VenteService;
 import com.lloufa.gestionstockback.validator.VenteValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,12 +35,14 @@ public class VenteServiceImpl implements VenteService {
     private final VenteRepository venteRepository;
     private final ArticleService articleService;
     private final LigneVenteRepository ligneVenteRepository;
+    private final MvtStkService mvtStkService;
 
     @Autowired
-    public VenteServiceImpl(VenteRepository venteRepository, ArticleService articleService, LigneVenteRepository ligneVenteRepository) {
+    public VenteServiceImpl(VenteRepository venteRepository, ArticleService articleService, LigneVenteRepository ligneVenteRepository, MvtStkService mvtStkService) {
         this.venteRepository = venteRepository;
         this.articleService = articleService;
         this.ligneVenteRepository = ligneVenteRepository;
+        this.mvtStkService = mvtStkService;
     }
 
     @Override
@@ -55,6 +64,7 @@ public class VenteServiceImpl implements VenteService {
             LigneVente ligneVente = LigneVenteMapping.toEntity(ligneVenteDto);
             ligneVente.setVente(savedVente);
             ligneVenteRepository.save(ligneVente);
+            this.updateMvtStk(ligneVenteDto);
         }
         return VenteMapping.fromEntity(savedVente);
     }
@@ -90,8 +100,24 @@ public class VenteServiceImpl implements VenteService {
 
     @Override
     public void delete(Integer id) {
-        VenteDto venteDto = findById(id);
-        if (null != venteDto) this.venteRepository.delete(VenteMapping.toEntity(venteDto));
+        this.findById(id);
+
+        Optional.ofNullable(this.ligneVenteRepository.findAllByVenteId(id))
+                .orElseThrow(() -> new InvalidOperationException("Impossible de supprimer une vente qui a déjà des lignes de ventes", ErrorCode.VENTE_ALREADY_IN_USE));
+
+        this.venteRepository.deleteById(id);
+    }
+
+    private void updateMvtStk(LigneVenteDto ligneVente) {
+        MvtStkDto mvtStkDto = MvtStkDto.builder()
+                .articleDto(ligneVente.getArticleDto())
+                .dateMvt(Instant.now())
+                .typeMvtStk(TypeMvtStk.SORTIE)
+                .sourceMvtStk(SourceMvtStk.VENTE)
+                .quantite(ligneVente.getQuantite())
+                .idEntreprise(ligneVente.getIdEntreprise())
+                .build();
+        this.mvtStkService.entreeStock(mvtStkDto);
     }
 
 }

@@ -12,13 +12,9 @@ import java.util.List;
 public class VenteDto {
 
     private Integer id;
-
     private String code;
-
     private Instant dateVente;
-
     private String commentaire;
-
     private List<LigneVenteDto> ligneVenteDtos;
 
 }

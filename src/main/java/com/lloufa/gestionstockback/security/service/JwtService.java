@@ -1,6 +1,6 @@
 package com.lloufa.gestionstockback.security.service;
 
-import com.lloufa.gestionstockback.Utils.ConstantEnum;
+import com.lloufa.gestionstockback.Utils.ConstantEnumUtils;
 import com.lloufa.gestionstockback.security.model.ExtendedUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -28,7 +28,7 @@ public class JwtService {
 
     public String extractIdEntreprise(String token) {
         final Claims claims = extractAllClaims(token);
-        return claims.get(ConstantEnum.ID_ENNTREPRISE.getValue(), String.class);
+        return claims.get(ConstantEnumUtils.ID_ENTREPRISE.getValue(), String.class);
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -60,7 +60,7 @@ public class JwtService {
                 .setSubject(extendedUser.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .claim(ConstantEnum.ID_ENNTREPRISE.getValue(), extendedUser.getIdEntreprise())
+                .claim(ConstantEnumUtils.ID_ENTREPRISE.getValue(), extendedUser.getIdEntreprise().toString())
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }

@@ -1,11 +1,14 @@
 package com.lloufa.gestionstockback.service.impl;
 
 import com.lloufa.gestionstockback.dto.RoleDto;
+import com.lloufa.gestionstockback.dto.UtilisateurDto;
 import com.lloufa.gestionstockback.exception.EntityNotFoundException;
 import com.lloufa.gestionstockback.exception.ErrorCode;
 import com.lloufa.gestionstockback.exception.InvalidEntityException;
 import com.lloufa.gestionstockback.mapping.RoleMapping;
+import com.lloufa.gestionstockback.mapping.UtilisateurMapping;
 import com.lloufa.gestionstockback.model.Role;
+import com.lloufa.gestionstockback.model.Utilisateur;
 import com.lloufa.gestionstockback.repository.RoleRepository;
 import com.lloufa.gestionstockback.service.RoleService;
 import com.lloufa.gestionstockback.validator.RoleValidator;
@@ -67,6 +70,13 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDto> findAll() {
         List<Role> roleList = this.roleRepository.findAll();
         log.error("Number role in BDD is {}", roleList.size());
+        return roleList.stream().map(RoleMapping::fromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RoleDto> findAllByUtilisateur(UtilisateurDto utilisateurDto) {
+        List<Role> roleList = this.roleRepository.findAllByUtilisateur(UtilisateurMapping.toEntity(utilisateurDto));
+        log.error("Number role by idUser {} in BDD is {}", utilisateurDto.getId(), roleList.size());
         return roleList.stream().map(RoleMapping::fromEntity).collect(Collectors.toList());
     }
 

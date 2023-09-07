@@ -15,9 +15,7 @@ import java.math.BigDecimal;
 public class LigneCommandeFournisseur extends AbstractEntity {
 
     private BigDecimal quantite;
-
     private BigDecimal prixUnitaire;
-
     private String idEntreprise;
 
     @ManyToOne

@@ -10,19 +10,12 @@ import java.util.List;
 public class FournisseurDto {
 
     private Integer id;
-
     private String nom;
-
     private String prenom;
-
     private AdresseDto adresseDto;
-
     private String email;
-
     private String numeroTelephone;
-
     private String photo;
-
     private List<CommandeFournisseurDto> commandeFournisseurDtos;
 
 }
